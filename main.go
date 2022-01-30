@@ -5,6 +5,8 @@ import (
 	"log"
 	math "math/rand"
 	"time"
+
+	"github.com/emillium/crispy-train/chain"
 )
 
 func main() {
@@ -13,12 +15,13 @@ func main() {
 
 	// generate an initial PoS network including a blockchain with a genesis block.
 	genesisTime := time.Now().String()
-	pos := &PoSNetwork{
-		Blockchain: []*Block{
+	hash := chain.NewHash(genesisTime)
+	pos := &chain.PoSNetwork{
+		Blockchain: []*chain.Block{
 			{
 				Timestamp:     genesisTime,
 				PrevHash:      "",
-				Hash:          newHash(genesisTime),
+				Hash:          hash,
 				ValidatorAddr: "",
 			},
 		},
